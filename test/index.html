@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mini Quiz</title>
+  <script src="index.js" defer></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-6">
+  <div class="max-w-md mx-auto bg-white p-6 rounded shadow">
+    <h1 class="text-xl font-bold mb-4">Simple Quiz</h1>
+
+    <form id="quizForm" class="space-y-4">
+      <div>
+        <label class="block text-sm font-medium">Your Name:</label>
+        <input id="userName" type="text" class="w-full border p-2 rounded" placeholder="Enter your name" />
+        <p id="focusStatus" class="text-xs text-gray-500 mt-1"></p>
+      </div>
+
+      <div>
+        <p class="font-medium">What is 2 + 2?</p>
+        <label class="block"><input type="radio" name="question" value="3" class="mr-2" /> 3</label>
+        <label class="block"><input type="radio" name="question" value="4" class="mr-2" /> 4</label>
+        <label class="block"><input type="radio" name="question" value="5" class="mr-2" /> 5</label>
+      </div>
+
+      <button id="submitBtn" type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+        Submit
+      </button>
+    </form>
+
+    <div id="result" class="mt-4 font-semibold"></div>
+  </div>
+</body>
+</html>

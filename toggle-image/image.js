@@ -1,34 +1,54 @@
+const smallImageData = [
+  {
+    src: 'public/img2.jpeg',
+    name: 'Rorry Ramos',
+    course: 'BSIT',
+  },
+  {
+    src: 'public/img1.webp',
+    name: 'Bantam Palomeras',
+    course: 'BSIT',
+  },
+];
 
-  const gallery = document.getElementById("gallery");
+const Container = document.getElementById('container');
+const ImageContainer = document.createElement('div');
+const MainImage = document.createElement('img');
+const details = document.createElement('div');
+const smallImgContainer = document.createElement('div');
 
-  // 1. Main Image (Parent)
-  const mainImage = document.createElement("img");
-  mainImage.src = "https://via.placeholder.com/300x200?text=Main+Image";
-  mainImage.className = "w-[300px] h-[200px] rounded-lg shadow-lg";
-  gallery.appendChild(mainImage);
 
-  // 2. Thumbnails Container
-  const thumbContainer = document.createElement("div");
-  thumbContainer.className = "flex space-x-4";
+ImageContainer.className = 'flex flex-col p-8 rounded-lg shadow-md mb-10';
+MainImage.src = smallImageData[0].src;
+MainImage.className = 'w-30 rounded-lg mb-10';
 
-  // 3. Thumbnail URLs
-  const thumbnails = [
-    "public/img1.webp",
-    "public/img2.jpeg",
-  ];
+details.className = 'flex flex-col text-lg font-bold mb-10';
+details.innerHTML = `
+  <h1>Name: ${smallImageData[0].name}</h1>
+  <h1>Course: ${smallImageData[0].course}</h1>
+`;
 
-  thumbnails.map((src) => {
-    const thumb = document.createElement("img");
-    thumb.src = src;
-    thumb.className = "w-[100px] h-[70px] rounded cursor-pointer hover:scale-105 transition";
+ImageContainer.appendChild(MainImage);
+ImageContainer.appendChild(details);
 
-    // When thumbnail clicked, set it as main image
-    thumb.addEventListener("click", () => {
-      mainImage.src = src.replace("100x70", "300x200").replace("Image", "Main");
-    });
+smallImgContainer.className = 'flex items-center justify-center gap-5';
 
-    thumbContainer.appendChild(thumb);
+smallImageData.map((data) => {
+  const smallImg = document.createElement('img');
+  smallImg.src = data.src;
+  smallImg.className = 'w-20 rounded-lg cursor-pointer';
+
+  smallImg.addEventListener('click', () => {
+    MainImage.src = data.src;
+    details.innerHTML = `
+      <h1>Name: ${data.name}</h1>
+      <h1>Course: ${data.course}</h1>
+    `;
   });
 
-  gallery.appendChild(thumbContainer);
+  smallImgContainer.appendChild(smallImg);
+});
+
+ImageContainer.appendChild(smallImgContainer);
+Container.appendChild(ImageContainer);
 

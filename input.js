@@ -1,51 +1,25 @@
-//  use case of input events with appendChild
+const buttonClick = document.getElementById('submit_btn');
+const output = document.getElementById('output');
 
-const form = document.getElementById('formData');
-const output = document.getElementById('display');
+buttonClick.addEventListener('click', () => {
+    const name = document.getElementById('name').value;
+    const comment = document.getElementById('comment').value;
 
-form.addEventListener('input', () => {
 
-    const formData = new FormData(form);
-    const formObject = Object.fromEntries(formData.entries());
-
-    const createdAlement = document.createElement('div');
-
-    createdAlement.innerHTML = `
-       <h1 class="text-3xl font-bold mt-8">Created Element Append</h1>
+    const commentContainer = document.createElement('div');
+     commentContainer.className = 'flex flex-col gap-2 mb-4 bg-white p-4 rounded shadow';
+    commentContainer.innerHTML = `
+        <h1 class="text-lg font-semibold">${name}: ${comment}</h1>
+        <button class='remove_btn py-2 bg-red-600 rounded-lg w-full text-white font-bold'>
+            Remove
+        </button>
     `;
 
-    output.innerHTML = `
-        <div>
-            <h1 class="text-3xl font-bold mb-3">${formObject.name || ''}</h1>
-            <div class="p-2.5 bg-green-400">
-                <h3 class="text-xl font-semibold">Personal Details</h3>
-            </div>
+    output.appendChild(commentContainer);
 
-            <div class="grid grid-cols-2 gap-5">
-                <div class="flex items-center justify-between">
-                    <h1 class="text-lg font-semibold">Name</h1>
-                    <span class="text-lg font-semibold">:</span>
-                </div>
-                <div><span class="text-lg font-semibold">${formObject.name || ''}</span></div>
-            </div>
+    const removeComment = commentContainer.querySelector('.remove_btn');
+    removeComment.addEventListener('click', () => {
+        commentContainer.remove()
+    })
 
-            <div class="grid grid-cols-2 gap-5">
-                <div class="flex items-center justify-between">
-                    <h1 class="text-lg font-semibold">Birth Place</h1>
-                    <span class="text-lg font-semibold">:</span>
-                </div>
-                <div><span class="text-lg font-semibold">${formObject.placebirth || ''}</span></div>
-            </div>
-
-            <div class="grid grid-cols-2 gap-5">
-                <div class="flex items-center justify-between">
-                    <h1 class="text-lg font-semibold">Status</h1>
-                    <span class="text-lg font-semibold">:</span>
-                </div>
-                <div><span class="text-lg font-semibold">${formObject.status || ''}</span></div>
-            </div>
-        </div>
-    `;
-
-    output.appendChild(createdAlement)
-});
+})
